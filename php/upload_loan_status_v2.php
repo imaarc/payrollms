@@ -16,7 +16,7 @@ function sendEmail($toEmail, $toName, $subject, $body, $fromEmail, $fromName) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'montanezrechell@gmail.com'; //to be changed
-        $mail->Password = 'xwit cikq fjtt icso';
+        $mail->Password = 'oyfa rric aaue yvir';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
@@ -27,7 +27,7 @@ function sendEmail($toEmail, $toName, $subject, $body, $fromEmail, $fromName) {
         // Email content
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $mail->Body = nl2br($body);
+        $mail->Body = nl2br($body); 
 
         // Send email
         $mail->send();
