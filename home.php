@@ -128,9 +128,9 @@
 
 					    
 					    	<?php
-						    $sql = "SELECT DATE_FORMAT(date_created, '%Y-%m') as month, SUM(salary - net) as total_salary 
+						    $sql = "SELECT  DATE_FORMAT(date_created, '%Y-%m') as month, SUM(salary - net) as total_salary 
 						            FROM payroll_items 
-						            GROUP BY YEAR(date_created), MONTH(date_created)";
+						            GROUP BY YEAR(date_created), MONTH(date_created)  ORDER BY date_created DESC LIMIT 1";
 						    
 						    $query = mysqli_query($conn, $sql);
 

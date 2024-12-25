@@ -27,30 +27,38 @@ $employee_id = $_GET['employee_id'];
 $subject = "Loan Application";
 $body = "Hello Mr./Mrs. ".$name." your loan application has been ".$value.". Please see admin for more details." ;
 
+
+function sendEmail($toEmail, $toName, $subject, $body, $fromEmail, $fromName) {
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'montanezrechell@gmail.com'; //to be changed
+        $mail->Password = 'xwit cikq fjtt icso';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        // Set sender and recipient
+        $mail->setFrom($fromEmail, $fromName);
+        $mail->addAddress($toEmail, $toName);
+
+        // Email content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = nl2br($body);
+
+        // Send email
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log("Mailer Error: {$mail->ErrorInfo}");
+        return false;
+    }
+}
+
 try {
-    // Server settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'montanezrechell@gmail.com'; //to be changed
-    $mail->Password = 'xwit cikq fjtt icso';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
-
-    // Set sender email dynamically based on the user
-    $userEmail = $emailAddressSender; // Replace this with the user's email address
-    $mail->setFrom($userEmail, $senderName);
-
-    // Recipient
-    $mail->addAddress($emailAddressReceipient, $name);
-
-    // Content
-    $mail->isHTML(true);
-    $mail->Subject = $subject;
-    $mail->Body = nl2br($body);
-
-    // Send the email
-    $mail->send();
 
     $sql = "UPDATE loanmanagement SET status = '$value' WHERE loanId = '$id'";
     $query = mysqli_query($conn, $sql);
@@ -71,6 +79,11 @@ try {
                 echo "Error inserting into employee_deductions: " . mysqli_error($conn);
             }
         }
+
+        if (!sendEmail($emailAddressReceipient, $name, $subject, $body, 'admin@gmail.com', 'Admin')) {
+            error_log("Error sending email to {$emailAddressReceipient}");
+        }
+        
         header("Location: ../index.php?page=loanmanagement");
     } else {
         echo "Error updating loanmanagement: " . mysqli_error($conn);
@@ -79,6 +92,7 @@ try {
 
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Message could not be sent. Mailer Error: {$e}";
 }
 
 
