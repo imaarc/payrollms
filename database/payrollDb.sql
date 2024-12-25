@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2024 at 03:23 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Dec 25, 2024 at 04:11 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -244,6 +244,26 @@ INSERT INTO `loantypes` (`loanTypeId`, `name`, `amount`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `logId` int(12) NOT NULL,
+  `description` varchar(555) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`logId`, `description`, `date`) VALUES
+(1, 'admin has logged in', '2024-12-23 10:19:11'),
+(2, 'ADMIN has logged in', '2024-12-25 04:00:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payroll`
 --
 
@@ -402,6 +422,12 @@ ALTER TABLE `loantypes`
   ADD PRIMARY KEY (`loanTypeId`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`logId`);
+
+--
 -- Indexes for table `payroll`
 --
 ALTER TABLE `payroll`
@@ -482,6 +508,12 @@ ALTER TABLE `loanmanagement`
 --
 ALTER TABLE `loantypes`
   MODIFY `loanTypeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `logId` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `payroll`

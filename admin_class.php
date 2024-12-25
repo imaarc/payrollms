@@ -15,17 +15,57 @@ Class Action {
 	    ob_end_flush();
 	}
 
-	function login(){
+	function login() {
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".$password."' ");
-		if($qry->num_rows > 0){
-			foreach ($qry->fetch_array() as $key => $value) {
-				if($key != 'passwors' && !is_numeric($key))
-					$_SESSION['login_'.$key] = $value;
+	
+		// Prepared statement to avoid SQL injection
+		$stmt = $this->db->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+		$stmt->bind_param('ss', $username, $password);
+		$stmt->execute();
+		$qry = $stmt->get_result();
+	
+		if($qry->num_rows > 0) {
+			// Fetching the user data
+			$user = $qry->fetch_assoc();
+	
+			// Storing session variables
+			foreach ($user as $key => $value) {
+				if ($key != 'password' && !is_numeric($key)) {
+					$_SESSION['login_' . $key] = $value;
+				}
 			}
-				return 1;
-		}else{
+	
+			// Logging the login event
+			$datetime = date('Y-m-d H:i:s');
+			$desc = $username . " has logged in";
+	
+			// Insert the log
+			$stmt1 = $this->db->prepare("INSERT INTO logs (description, date) VALUES (?, ?)");
+			$stmt1->bind_param('ss', $desc, $datetime);
+			$stmt1->execute();
+	
+			if ($stmt1->error) {
+				echo "Error logging activity: " . $stmt1->error;
+			}
+	
+			return 1;
+		} else {
 			return 3;
+		}
+	}
+	
+
+	function logLogin($username) {
+		// Get current timestamp
+		$datetime = date('Y-m-d H:i:s');
+
+		$desc = $username + "has logged in";
+	
+		// Insert the login log into the login_logs table
+		$qry = $this->db->query("INSERT INTO logs (description, date) VALUES ('".$desc."', '".$datetime."')");
+		if (!$qry) {
+			// Handle the case if logging fails (optional)
+			error_log('Failed to log login for user: ' . $username);
 		}
 	}
 	function login2(){
