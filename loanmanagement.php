@@ -22,6 +22,7 @@
 									<th>Interest</th>
 									<th>Loan Term</th>
 									<th>Deductions</th>
+									<th>Remaining terms</th>
 									<th>Status</th>
 									<th>Reason</th>
 									<th>Payment Type</th>
@@ -51,6 +52,39 @@
 									<td><?=$row['interest']?>%</td>
 									<td><?=$row['loan_term']?> months</td>
 									<td><?=$row['monthly_deduction']?></td>
+
+
+									<?php if ($row['status'] == "Approved") { 
+									$start = $row['start_date']; // Example: '12-19-2025'
+									$end = $row['end_date'];     // Example: '10-19-2025'
+
+									// Convert strings to DateTime objects
+									$startDate = DateTime::createFromFormat('Y-m-d', $start);
+									$endDate = DateTime::createFromFormat('Y-m-d', $end);
+
+										if ($startDate && $endDate) {
+										    // Get the difference in months
+										    $interval = $startDate->diff($endDate);
+
+										    // Calculate total months (difference in years and months)
+										    $totalMonths = ($interval->y * 12) + $interval->m;
+
+										    // Calculate the current month position
+										    $currentMonthPosition = ($interval->invert === 1) ? 0 : 1;
+
+										    // Display as "currentMonth/totalMonths"
+										    $remainingMonths = $currentMonthPosition . '/' . $totalMonths;
+
+										    echo "<td>{$remainingMonths}</td>";
+										} else {
+										    echo "<td>Invalid date format</td>";
+										}
+									}else{
+										echo "<td>N/A</td>";
+									}
+									
+									?>
+
 
 									<td>
 

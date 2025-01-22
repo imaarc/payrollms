@@ -93,7 +93,11 @@
 	<hr>
 			<div class="row">
 				<div class="col-lg-12">
-					<button class="btn btn-primary btn-sm btn-block col-md-2 float-right" type="button" data-dismiss="modal">Close</button>
+					<div class="d-flex justify-content-end">
+						
+						<a href="print_payroll_details.php?id=<?=$_GET['id']?>" target="_blank"  class="btn btn-success w-25 mr-3" id="print_btn" type="button"><span class="fa fa-print"></span> Print</a>
+						<button class="btn btn-primary w-25   " type="button" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 </div>
@@ -111,6 +115,3 @@
 		width: 100%
 	}
 </style>
-<script>
-
-</script>
