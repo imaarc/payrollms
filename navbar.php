@@ -18,6 +18,7 @@
 					<a href="index.php?page=deductions" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-money-bill-wave"></i></span> Deduction List</a>
 					<a href="index.php?page=loanmanagement" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-wallet"></i></span> Loan Management</a>	
 					<a href="index.php?page=loantype" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-wallet"></i></span> Loan Types</a>	
+					<a href="index.php?page=logs" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-history"></i></span> Logs</a>	
 					
 					<a href="index.php?page=logs" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-history"></i></span> Logs</a>	
 					

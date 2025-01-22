@@ -186,7 +186,8 @@ INSERT INTO `employee_deductions` (`id`, `employee_id`, `deduction_id`, `type`, 
 (2, 9, 3, 2, 500, '0000-00-00', '2020-09-29 11:52:46'),
 (3, 9, 1, 3, 1500, '2020-09-16', '2020-09-29 11:53:27'),
 (10, 10, 4, 2, 4727.98, '2024-05-18', '2024-05-18 22:09:58'),
-(12, 9, 4, 1, 10046.2, '2024-10-09', '2024-10-11 23:15:51');
+(12, 9, 4, 1, 10046.2, '2024-10-09', '2024-10-11 23:15:51'),
+(13, 10, 4, 1, 5963.85, '2024-12-25', '2024-12-25 14:40:00');
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,9 @@ INSERT INTO `loanmanagement` (`loanId`, `employeeId`, `employee_deduction_id`, `
 (15, 10, 0, 100000, 2, 12, 'Rejected', '', 9455.96, 1, 0, '2024-05-18', '2025-05-18'),
 (18, 9, 12, 100000, 3, 12, 'Approved', '', 10046.21, 1, 0, '2024-10-09', '2025-10-09'),
 (19, 10, 0, 10000000, 10, 36, 'Rejected', 'Low Credit Score', 1033430.64, 1, 0, '2024-10-12', '2027-10-12'),
-(22, 10, 0, 50000, 5, 3, 'Pending', '', 18360.43, 1, 2, '2024-10-12', '2025-01-12');
+(22, 10, 0, 50000, 5, 3, 'Rejected', 'Low Credit Score', 18360.43, 1, 2, '2024-10-12', '2025-01-12'),
+(23, 10, 0, 100000, 10, 12, 'Rejected', 'Low Credit Score', 14676.33, 1, 1, '2024-12-25', '2025-12-25'),
+(24, 10, 13, 50000, 6, 12, 'Approved', '', 5963.85, 1, 2, '2024-12-25', '2025-12-25');
 
 -- --------------------------------------------------------
 
@@ -429,6 +432,12 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`logId`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`logId`);
+
+--
 -- Indexes for table `payroll`
 --
 ALTER TABLE `payroll`
@@ -496,19 +505,25 @@ ALTER TABLE `employee_allowances`
 -- AUTO_INCREMENT for table `employee_deductions`
 --
 ALTER TABLE `employee_deductions`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `loanmanagement`
 --
 ALTER TABLE `loanmanagement`
-  MODIFY `loanId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `loanId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `loantypes`
 --
 ALTER TABLE `loantypes`
   MODIFY `loanTypeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `logId` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logs`

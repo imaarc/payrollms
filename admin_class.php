@@ -16,6 +16,7 @@ Class Action {
 	}
 
 	function login() {
+	function login() {
 		extract($_POST);
 	
 		// Prepared statement to avoid SQL injection
@@ -51,6 +52,21 @@ Class Action {
 			return 1;
 		} else {
 			return 3;
+		}
+	}
+	
+
+	function logLogin($username) {
+		// Get current timestamp
+		$datetime = date('Y-m-d H:i:s');
+
+		$desc = $username + "has logged in";
+	
+		// Insert the login log into the login_logs table
+		$qry = $this->db->query("INSERT INTO logs (description, date) VALUES ('".$desc."', '".$datetime."')");
+		if (!$qry) {
+			// Handle the case if logging fails (optional)
+			error_log('Failed to log login for user: ' . $username);
 		}
 	}
 	
