@@ -132,15 +132,10 @@
 						            FROM payroll_items 
 						            GROUP BY YEAR(date_created), MONTH(date_created)  ORDER BY date_created DESC LIMIT 1";
 						    
-						    $query = mysqli_query($conn, $sql);
+						    $query = mysqli_query($conn, $sql)->fetch_assoc();
 
-						    if ($query) {
-						        while ($row = mysqli_fetch_assoc($query)) {
-						            echo  "<h1>". $row['total_salary'] ."</h1>" . " <span>(". $row['month'].")</span>";
-						        }
-						    } else {
-						        echo "Error: " . mysqli_error($conn);
-						    }
+						    echo  "<h1>". $query['total_salary'] ."</h1>" . " <span>(". $query['month'].")</span>";
+						   
 						?>
 					    
 

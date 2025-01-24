@@ -20,8 +20,6 @@
 					<a href="index.php?page=loantype" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-wallet"></i></span> Loan Types</a>	
 					<a href="index.php?page=logs" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-history"></i></span> Logs</a>	
 					
-					<a href="index.php?page=logs" class="nav-item nav-deductions"><span class='icon-field'><i class="fa fa-history"></i></span> Logs</a>	
-					
 				<?php }else{ ?>
 
 					<a href="index.php?page=attendance" class="nav-item nav-attendance"><span class='icon-field'><i class="fa fa-th-list"></i></span> Attendance</a>
