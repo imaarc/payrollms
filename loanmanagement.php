@@ -327,15 +327,27 @@
 							<?php endwhile; ?>
 						</select>
 		            </div>
+					<div class="form-group">
+		                <label for="" class="control-label">Loan Term</label>
+		            <select name="loan_term" class="borwser-default select2" id="loan_term">
+						<option value="12">12 months</option>
+						<option value="24">24 months</option>
+						<option value="36">36 months</option>
+					</select>
+				</div>
 
-		            <div class="form-group">
-		                <label for="interest_rate">Interest Rate (%)</label>
-		                <input type="number" step="0.01" class="form-control" name="interest_rate" placeholder="Enter Interest Rate" required>
-		            </div>
-		            <div class="form-group">
+					<div class="form-group">
+				        <label for="interest_rate">Interest Rate (%)</label>
+				        <input type="number" step="0.01" class="form-control" id="interest_rate" name="interest_rate" placeholder="Enter Interest Rate" readonly>
+				    </div>
+
+		             <!-- <div class="form-group">
 		                <label for="loan_term">Loan Term (Months)</label>
 		                <input type="number" class="form-control" name="loan_term" placeholder="Enter Loan Term" required>
-		            </div>
+		            </div> -->
+
+		            
+		           
 		            <div class="form-group">
 		                <label for="start_date">Start Date</label>
 		                <input type="date" class="form-control" name="start_date" required>
@@ -408,6 +420,33 @@
 				cursor: pointer;
 			}
 		</style>
+
+	<script>
+    $(document).ready(function () {
+        // Mapping of loan terms to interest rates
+        const interestRates = {
+            "12": 3,
+            "24": 6,
+            "36": 9
+        };
+
+        // Function to update the interest rate input
+        function updateInterestRate() {
+            const selectedTerm = $('#loan_term').val(); // Get selected loan term
+            if (interestRates[selectedTerm] !== undefined) {
+                $('#interest_rate').val(interestRates[selectedTerm]); // Set the value
+            } else {
+                $('#interest_rate').val(''); // Clear the value if no match
+            }
+        }
+
+        // Add an event listener to update the interest rate when selection changes
+        $('#loan_term').change(updateInterestRate);
+
+        // Automatically set the value on page load
+        updateInterestRate();
+    });
+</script>
 			
 		
 		
@@ -443,6 +482,9 @@
             });
         });
     });
+
+
+    </script>
 </script>
 
 
